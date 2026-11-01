@@ -1,0 +1,5 @@
+Te egy logelemző vagy. Az alábbi logfájl alapján válaszolj:
+Milyen logtípus ez? 
+
+SZABÁLY: Kizárólag egyetlen szót add meg válaszként (pl. Apache, Nginx, Linux, Python), semmilyen kísérőszöveget vagy mondatot ne írj!
+
