@@ -1,0 +1,10 @@
+2026-11-01T08:14:22Z webserver[auth]: LOGIN_SUCCESS user=admin source_ip=192.0.2.10 method=POST
+2026-11-01T08:19:07Z webserver[auth]: LOGIN_FAILURE user=editor source_ip=198.51.100.24 reason=invalid_password
+2026-11-01T08:21:43Z webserver[auth]: LOGIN_SUCCESS user=editor source_ip=198.51.100.24 method=POST
+2026-11-01T09:02:11Z webserver[auth]: LOGOUT user=editor source_ip=198.51.100.24
+2026-11-01T09:17:56Z webserver[auth]: LOGIN_SUCCESS user=monitor source_ip=203.0.113.8 method=SSO
+2026-11-01T10:04:31Z webserver[auth]: LOGIN_FAILURE user=admin source_ip=203.0.113.77 reason=invalid_password
+2026-11-01T10:05:02Z webserver[auth]: LOGIN_FAILURE user=admin source_ip=203.0.113.77 reason=invalid_password
+2026-11-01T10:06:18Z webserver[auth]: LOGIN_SUCCESS user=admin source_ip=192.0.2.10 method=POST
+2026-11-01T11:42:09Z webserver[auth]: SESSION_EXPIRED user=monitor source_ip=203.0.113.8
+2026-11-01T12:03:45Z webserver[auth]: LOGIN_SUCCESS user=deploy source_ip=192.0.2.55 method=SSH_KEY
