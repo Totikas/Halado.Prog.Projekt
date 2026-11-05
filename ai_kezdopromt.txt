@@ -1,5 +1,17 @@
-Te egy logelemző vagy. Az alábbi logfájl alapján válaszolj:
-Milyen logtípus ez? 
+FONTOS ELEMZÉSI SZABÁLYOK:
 
-SZABÁLY: Kizárólag egyetlen szót add meg válaszként (pl. Apache, Nginx, Linux, Python), semmilyen kísérőszöveget vagy mondatot ne írj!
-
+1. Minden incidenshez kötelező konkrét, szó szerint a logfile-ból származó bizonyítékot megadnod.
+2. Tilos kitalált IP-címet, felhasználónevet vagy időpontot megadnod.
+3. Ha nem találsz konkrét bizonyítékot, ne jelents incidenst.
+4. Az event_type a biztonsági esemény típusát jelentse, például:
+   - BRUTE_FORCE
+   - PRIVILEGE_ESCALATION
+   - DATA_EXFILTRATION
+   - SENSITIVE_FILE_ACCESS
+   - SUSPICIOUS_LOGIN
+5. A HTTP GET és POST metódus önmagában nem jelent támadást.
+6. Vizsgáld meg az összes kapott logbejegyzést.
+7. Ne csak egyetlen incidensre korlátozd a válaszodat.
+8. Minden gyanús eseményt külön rögzíts.
+9. Az egymással összefüggő eseményeket is jelöld.
+10. A bizonyítékban mindig az eredeti logbejegyzés szerepeljen.

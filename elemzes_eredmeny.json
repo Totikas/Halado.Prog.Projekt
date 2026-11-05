@@ -1,0 +1,121 @@
+{
+    "summary": {
+        "total_chunks": 4,
+        "suspicious_events_found": 11
+    },
+    "incidents": [
+        {
+            "event_type": "BRUTE_FORCE",
+            "description": "Több invalid login próbálkozás történt a SSH szolgáltatáson keresztül.",
+            "evidences": [
+                "2026-11-05T08:09:10 auth sshd event=login_failed user=admin src=203.0.113.250 method=password reason=invalid_credentials",
+                "2026-11-05T08:09:32 auth sshd event=login_failed user=admin src=203.0.113.250 method=password reason=invalid_credentials",
+                "2026-11-05T08:10:08 auth sshd event=login_failed user=root src=203.0.113.250 method=password reason=invalid_credentials",
+                "2026-11-05T08:10:40 web01 nginx_access ip=192.0.2.28 method=GET path=/contact status=404 bytes=1313 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T08:10:46 auth sshd event=login_failed user=admin src=203.0.113.250 method=password reason=invalid_credentials"
+            ]
+        },
+        {
+            "event_type": "DATA_EXFILTRATION",
+            "description": "A .env fájl tartalma elérhetővé történt a weboldalon keresztül.",
+            "evidences": [
+                "2026-11-05T08:14:20 web01 nginx_access ip=203.0.113.250 method=GET path=/admin/.env status=200 bytes=1942 ua=\"curl/8.4.0\"",
+                "2026-11-05T08:21:40 web01 nginx_access ip=203.0.113.250 method=GET path=/backup/database.sql status=200 bytes=927441 ua=\"curl/8.4.0\""
+            ]
+        },
+        {
+            "event_type": "PRIVILEGE_ESCALATION",
+            "description": "A deploy felhasználó root szintű jogosultságokkal hozzáférhetett a rendszerhez.",
+            "evidences": [
+                "2026-11-05T08:12:03 audit sudo event=privilege_change user=deploy target=root command=\"/usr/bin/bash\" result=success tty=pts/2"
+            ]
+        },
+        {
+            "event_type": "SENSITIVE_FILE_ACCESS",
+            "description": "A .env fájl tartalma elérhetővé történt a weboldalon keresztül.",
+            "evidences": [
+                "2026-11-05T08:14:20 web01 nginx_access ip=203.0.113.250 method=GET path=/admin/.env status=200 bytes=1942 ua=\"curl/8.4.0\""
+            ]
+        },
+        {
+            "event_type": "DATA_EXFILTRATION",
+            "description": "IP címmel 203.0.113.250 kérte a backup/fájl.sql adatbázisát, ami jelent potenciális adatbázis elérés.",
+            "evidence": "2026-11-05T08:21:40 web01 nginx_access ip=203.0.113.250 method=GET path=/backup/database.sql status=200 bytes=927441 ua=\"curl/8.4.0\"",
+            "timestamp": "2026-11-05T08:21:40"
+        },
+        {
+            "event_type": "SUSPICIOUS_LOGIN",
+            "description": "IP címmel 198.51.100.7 kérte a /api/status információt két alkalommal, ami jelent potenciális támadás.",
+            "evidence": [
+                "2026-11-05T08:24:11 web01 nginx_access ip=198.51.100.7 method=GET path=/api/status status=200 bytes=8184 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T08:28:29 web01 nginx_access ip=198.51.100.7 method=GET path=/api/status status=200 bytes=3832 ua=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0\"",
+                "2026-11-05T08:32:20 web01 nginx_access ip=198.51.100.7 method=GET path=/api/status status=200 bytes=3323 ua=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0\"",
+                "2026-11-05T08:39:30 web01 nginx_access ip=198.51.100.7 method=GET path=/api/status status=200 bytes=7063 ua=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0\"",
+                "2026-11-05T08:48:19 web01 nginx_access ip=198.51.100.7 method=GET path=/login status=302 bytes=4175 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T08:48:57 web01 nginx_access ip=198.51.100.7 method=GET path=/dashboard status=304 bytes=346 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\""
+            ],
+            "timestamp": "2026-11-05T08:24:11"
+        },
+        {
+            "event_type": "BRUTE_FORCE",
+            "description": "IP címmel 192.0.2.14 kérte a /login oldalt két alkalommal, ami jelent potenciális jelszó megszolgalás.",
+            "evidence": [
+                "2026-11-05T08:26:42 web01 nginx_access ip=192.0.2.14 method=GET path=/login status=200 bytes=6838 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T08:35:24 web01 nginx_access ip=192.0.2.14 method=GET path=/help status=304 bytes=6471 ua=\"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_1) Safari/605.1\"",
+                "2026-11-05T08:43:12 web01 nginx_access ip=192.0.2.14 method=GET path=/assets/app.css status=200 bytes=2056 ua=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0\"",
+                "2026-11-05T08:44:39 web01 nginx_access ip=192.0.2.14 method=GET path=/assets/app.css status=200 bytes=2056 ua=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0\"",
+                "2026-11-05T08:45:50 web01 nginx_access ip=192.0.2.14 method=GET path=/login status=302 bytes=2248 ua=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0\"",
+                "2026-11-05T08:48:19 web01 nginx_access ip=192.0.2.14 method=GET path=/login status=302 bytes=4175 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T08:49:31 web01 nginx_access ip=198.51.100.7 method=GET path=/login status=302 bytes=4175 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\""
+            ],
+            "timestamp": "2026-11-05T08:26:42"
+        },
+        {
+            "event_type": "SUSPICIOUS_LOGIN",
+            "description": "IP címmel 198.51.100.7 két különböző felhasználónevet próbálkozott bejelentkezésre.",
+            "evidence": [
+                "2026-11-05T08:48:19 web01 nginx_access ip=198.51.100.7 method=GET path=/login status=302 bytes=4175 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T09:11:10 web01 nginx_access ip=198.51.100.7 method=GET path=/contact status=200 bytes=6406 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T09:15:58 web01 nginx_access ip=198.51.100.7 method=GET path=/contact status=200 bytes=6664 ua=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0\""
+            ]
+        },
+        {
+            "event_type": "DATA_EXFILTRATION",
+            "description": "IP címmel 192.0.2.14 két különböző fájlra kérés történt, amelyek nem léteznek a szerveren.",
+            "evidence": [
+                "2026-11-05T09:09:56 web01 nginx_access ip=192.0.2.14 method=GET path=/assets/logo.png status=404 bytes=7393 ua=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0\"",
+                "2026-11-05T09:14:15 web01 nginx_access ip=192.0.2.28 method=GET path=/assets/app.css status=200 bytes=333 ua=\"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_1) Safari/605.1\"",
+                "2026-11-05T09:14:51 web01 nginx_access ip=198.51.100.7 method=GET path=/index.html status=200 bytes=5081 ua=\"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_1) Safari/605.1\"",
+                "2026-11-05T09:15:27 web01 nginx_access ip=198.51.100.7 method=GET path=/dashboard status=200 bytes=1927 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T09:16:36 web01 nginx_access ip=192.0.2.14 method=GET path=/contact status=302 bytes=3950 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T09:17:16 web01 nginx_access ip=192.0.2.28 method=GET path=/contact status=200 bytes=2420 ua=\"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_1) Safari/605.1\""
+            ]
+        },
+        {
+            "event_type": "BRUTE_FORCE",
+            "description": "IP címmel 192.0.2.28 különböző felhasználónevet próbálkozott bejelentkezésre.",
+            "evidence": [
+                "2026-11-05T08:50:49 web01 nginx_access ip=198.51.100.22 method=GET path=/index.html status=200 bytes=5196 ua=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0\"",
+                "2026-11-05T08:51:59 web01 nginx_access ip=198.51.100.22 method=GET path=/dashboard status=200 bytes=5349 ua=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0\"",
+                "2026-11-05T08:52:28 web01 nginx_access ip=192.0.2.28 method=GET path=/login status=302 bytes=4816 ua=\"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_1) Safari/605.1\"",
+                "2026-11-05T08:53:05 web01 nginx_access ip=192.0.2.28 method=GET path=/login status=200 bytes=2253 ua=\"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_1) Safari/605.1\"",
+                "2026-11-05T08:55:34 web01 nginx_access ip=192.0.2.28 method=GET path=/login status=200 bytes=2753 ua=\"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_1) Safari/605.1\"",
+                "2026-11-05T09:09:14 web01 nginx_access ip=192.0.2.14 method=GET path=/assets/logo.png status=404 bytes=7393 ua=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0\"",
+                "2026-11-05T09:16:36 web01 nginx_access ip=192.0.2.14 method=GET path=/contact status=302 bytes=3950 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T09:17:16 web01 nginx_access ip=192.0.2.28 method=GET path=/contact status=200 bytes=2420 ua=\"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_1) Safari/605.1\""
+            ]
+        },
+        {
+            "event_type": "SUSPICIOUS_LOGIN",
+            "description": "IP címmel 192.0.2.14 két GET és POST kérést indított a /login címre, ami jelent potenciális hitelesítési támadás.",
+            "evidence": [
+                "2026-11-05T09:23:23 web01 nginx_access ip=192.0.2.14 method=POST path=/login status=200 bytes=1807 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T09:25:51 web01 nginx_access ip=192.0.2.28 method=GET path=/login status=200 bytes=226 ua=\"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_1) Safari/605.1\"",
+                "2026-11-05T09:26:24 web01 nginx_access ip=192.0.2.14 method=GET path=/login status=200 bytes=1038 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T09:28:26 web01 nginx_access ip=198.51.100.22 method=POST path=/index.html status=200 bytes=1503 ua=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0\"",
+                "2026-11-05T09:30:19 web01 nginx_access ip=192.0.2.28 method=GET path=/index.html status=200 bytes=2311 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\"",
+                "2026-11-05T09:32:10 web01 nginx_access ip=192.0.2.14 method=POST path=/index.html status=200 bytes=1022 ua=\"Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0\""
+            ]
+        }
+    ]
+}
